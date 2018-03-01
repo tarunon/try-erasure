@@ -21,7 +21,7 @@ public enum BoxErasure: NameSpace {
                 fatalError()
             }
 
-            func eat(_ targtet: Any) {
+            func eat(_ target: Any) {
                 fatalError()
             }
 
@@ -44,8 +44,8 @@ public enum BoxErasure: NameSpace {
                 return internalAnimal.bark()
             }
 
-            override func eat(_ targtet: Any) {
-                internalAnimal.eat(targtet)
+            override func eat(_ target: Any) {
+                internalAnimal.eat(target)
             }
 
             override func walk() {
@@ -67,8 +67,8 @@ public enum BoxErasure: NameSpace {
             return box.bark()
         }
 
-        public func eat(_ targtet: Any) {
-            box.eat(targtet)
+        public func eat(_ target: Any) {
+            box.eat(target)
         }
 
         public func walk() {

@@ -19,7 +19,7 @@ public enum InlineableBoxErasure: NameSpace {
             }
 
             @_versioned
-            func eat(_ targtet: Any) {
+            func eat(_ target: Any) {
                 fatalError()
             }
 
@@ -47,8 +47,8 @@ public enum InlineableBoxErasure: NameSpace {
             }
 
             @_versioned
-            override func eat(_ targtet: Any) {
-                internalAnimal.eat(targtet)
+            override func eat(_ target: Any) {
+                internalAnimal.eat(target)
             }
 
             @_versioned
@@ -75,8 +75,8 @@ public enum InlineableBoxErasure: NameSpace {
         }
 
         @_inlineable
-        public func eat(_ targtet: Any) {
-            box.eat(targtet)
+        public func eat(_ target: Any) {
+            box.eat(target)
         }
 
         @_inlineable

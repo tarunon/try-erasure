@@ -32,8 +32,8 @@ public enum ClosureErasure: NameSpace {
             return _bark()
         }
 
-        public func eat(_ targtet: Any) {
-            _eat(targtet)
+        public func eat(_ target: Any) {
+            _eat(target)
         }
 
         public func walk() {

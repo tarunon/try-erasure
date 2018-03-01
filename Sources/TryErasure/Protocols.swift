@@ -18,7 +18,7 @@ public extension NameSpace {
 /// 4 func, 0 assoctype Protocol sample
 public protocol AnimalProtocol {
     func bark() -> String
-    func eat(_ targtet: Any)
+    func eat(_ target: Any)
     func walk()
     func sleep()
 }

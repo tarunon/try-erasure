@@ -21,7 +21,7 @@ public enum ProxiedBoxErasure: NameSpace {
                 fatalError()
             }
 
-            public func eat(_ targtet: Any) {
+            public func eat(_ target: Any) {
                 fatalError()
             }
 

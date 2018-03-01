@@ -59,7 +59,7 @@ struct ClockMeasure<T>: TablePrintable {
 }
 
 struct Cat: AnimalProtocol {
-    func eat(_ targtet: Any) {
+    func eat(_ target: Any) {
         fatalError() // TBD
     }
 
@@ -84,7 +84,7 @@ struct CardboardHouse: FarmProtocol {
 }
 
 class Dog: AnimalProtocol {
-    func eat(_ targtet: Any) {
+    func eat(_ target: Any) {
         fatalError() // TBD
     }
     

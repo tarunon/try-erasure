@@ -20,8 +20,8 @@ public extension AnimalProxy {
     }
 
     @inline(__always)
-    public func eat(_ targtet: Any) {
-        internalAnimal.eat(targtet)
+    public func eat(_ target: Any) {
+        internalAnimal.eat(target)
     }
 
     @inline(__always)

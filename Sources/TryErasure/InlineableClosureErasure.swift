@@ -34,8 +34,8 @@ public enum InlineableClosureErasure: NameSpace {
         }
 
         @_inlineable
-        public func eat(_ targtet: Any) {
-            _eat(targtet)
+        public func eat(_ target: Any) {
+            _eat(target)
         }
 
         @_inlineable
