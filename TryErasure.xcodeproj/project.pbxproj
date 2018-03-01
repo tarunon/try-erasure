@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D298249B20478B6C00B1A4B2 /* AnyEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D298249920478B6800B1A4B2 /* AnyEquatable.swift */; };
 		OBJ_27 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_33 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* main.swift */; };
 		OBJ_35 /* TryErasure.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "TryErasure::TryErasure::Product" /* TryErasure.framework */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		D2796F3F203D3D8F0023009F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D298249920478B6800B1A4B2 /* AnyEquatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyEquatable.swift; sourceTree = "<group>"; };
 		OBJ_10 /* ClosureErasure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosureErasure.swift; sourceTree = "<group>"; };
 		OBJ_11 /* InlineableBoxErasure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InlineableBoxErasure.swift; sourceTree = "<group>"; };
 		OBJ_12 /* InlineableClosureErasure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InlineableClosureErasure.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				OBJ_13 /* Protocols.swift */,
 				OBJ_14 /* ProxiedBoxErasure.swift */,
 				OBJ_15 /* Proxy.swift */,
+				D298249920478B6800B1A4B2 /* AnyEquatable.swift */,
 			);
 			name = TryErasure;
 			path = Sources/TryErasure;
@@ -222,6 +225,7 @@
 			buildActionMask = 0;
 			files = (
 				OBJ_42 /* BoxErasure.swift in Sources */,
+				D298249B20478B6C00B1A4B2 /* AnyEquatable.swift in Sources */,
 				OBJ_43 /* ClosureErasure.swift in Sources */,
 				OBJ_44 /* InlineableBoxErasure.swift in Sources */,
 				OBJ_45 /* InlineableClosureErasure.swift in Sources */,
@@ -277,7 +281,6 @@
 				SDKROOT = macosx;
 				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SWIFT_PACKAGE;
-				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				USE_HEADERMAP = NO;
 			};
@@ -358,7 +361,6 @@
 				SDKROOT = macosx;
 				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SWIFT_PACKAGE;
-				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				USE_HEADERMAP = NO;
 			};
