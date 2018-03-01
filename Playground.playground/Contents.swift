@@ -21,7 +21,7 @@ class Cat: AnimalProtocol {
         fatalError() // TBD
     }
     
-    func eat(_ targtet: Any) {
+    func eat(_ target: Any) {
         fatalError() // TBD
     }
     
