@@ -83,6 +83,34 @@ struct CardboardHouse: FarmProtocol {
     }
 }
 
+class Dog: AnimalProtocol {
+    func eat(_ targtet: Any) {
+        fatalError() // TBD
+    }
+    
+    func walk() {
+        fatalError() // TBD
+    }
+    
+    func sleep() {
+        fatalError() // TBD
+    }
+    
+    func bark() -> String {
+        return "bowwow"
+    }
+}
+
+class WoodHouse: FarmProtocol {
+    let dog: Dog
+    init(dog: Dog) {
+        self.dog = dog
+    }
+    func get() -> Dog {
+        return dog
+    }
+}
+
 enum Execute: NameSpace {
     static func random<A, B, C, D, E, F>(
         _ a: @autoclosure @escaping () -> A,
@@ -124,8 +152,12 @@ enum Execute: NameSpace {
 Execute.benchmark {
     let cat = Cat()
     let cardboardHouse = CardboardHouse(cat: cat)
+    let dog = Dog()
+    let woodHouse = WoodHouse(dog: dog)
+    let catCase = ["struct Cat"]
+    let dogCase = ["class Dog"]
 
-    let (animal_0, animal_1, animal_2, animal_3, animal_4, animal_5)
+    let (animal_s0, animal_s1, animal_s2, animal_s3, animal_s4, animal_s5)
         = Execute.random(
             ClockMeasure(
                 "Existential",
@@ -158,17 +190,54 @@ Execute.benchmark {
                 method: { $0.bark() }
             )
     )
+    
+    let (animal_c0, animal_c1, animal_c2, animal_c3, animal_c4, animal_c5)
+        = Execute.random(
+            ClockMeasure(
+                "Existential",
+                init: { dog as AnimalProtocol },
+                method: { $0.bark() }
+            ),
+            ClockMeasure(
+                "Closure",
+                init: { ClosureErasure.AnimalErasure(dog) },
+                method: { $0.bark() }
+            ),
+            ClockMeasure(
+                "InlineClosure",
+                init: { InlineableClosureErasure.AnimalErasure(dog) },
+                method: { $0.bark() }
+            ),
+            ClockMeasure(
+                "Box",
+                init: { BoxErasure.AnimalErasure(dog) },
+                method: { $0.bark() }
+            ),
+            ClockMeasure(
+                "InlineBox",
+                init: { InlineableBoxErasure.AnimalErasure(dog) },
+                method: { $0.bark() }
+            ),
+            ClockMeasure(
+                "ProxyBox",
+                init: { ProxiedBoxErasure.AnimalErasure(dog) },
+                method: { $0.bark() }
+            )
+    )
 
     print(
         PrintTable(
             title: "Animal(4 function, 0 assoctype)",
             textLength: 25,
             header: ["＼", "init clock(x100_000)", "mem size", "method clock(x100_000)"],
-            rows: [animal_0, animal_1, animal_2, animal_3, animal_4, animal_5]
+            rows: [catCase, animal_s0, animal_s1, animal_s2, animal_s3, animal_s4, animal_s5,
+                   dogCase, animal_c0, animal_c1, animal_c2, animal_c3, animal_c4, animal_c5]
         )
     )
+    
+    Thread.sleep(forTimeInterval: 1)
 
-    let (farm_0, farm_1, farm_2, farm_3, farm_4, farm_5)
+    let (farm_s0, farm_s1, farm_s2, farm_s3, farm_s4, farm_s5)
         = Execute.random(
             /* ClockMeasure(
              "Existential",
@@ -202,17 +271,56 @@ Execute.benchmark {
                 method: { $0.get() }
             )
     )
+    
+    let (farm_c0, farm_c1, farm_c2, farm_c3, farm_c4, farm_c5)
+        = Execute.random(
+            /* ClockMeasure(
+             "Existential",
+             init: { cardboardHouse as FarmProtocol },
+             method: { /* $0.get() */ }
+             ), */ // Cannot make existential with associatedtype in Swift 4
+            ["Existential", "---", "---", "---"],
+            ClockMeasure(
+                "Closure",
+                init: { ClosureErasure.FarmErasure(woodHouse) },
+                method: { $0.get() }
+            ),
+            ClockMeasure(
+                "InlineClosure",
+                init: { InlineableClosureErasure.FarmErasure(woodHouse) },
+                method: { $0.get() }
+            ),
+            ClockMeasure(
+                "Box",
+                init: { BoxErasure.FarmErasure(woodHouse) },
+                method: { $0.get() }
+            ),
+            ClockMeasure(
+                "InlineBox",
+                init: { InlineableBoxErasure.FarmErasure(woodHouse) },
+                method: { $0.get() }
+            ),
+            ClockMeasure(
+                "ProxyBox",
+                init: { ProxiedBoxErasure.FarmErasure(woodHouse) },
+                method: { $0.get() }
+            )
+    )
 
     print(
         PrintTable(
             title: "Farm(1 function, 1 assoctype)",
             textLength: 25,
             header: ["＼", "init clock(x100_000)", "mem size", "method clock(x100_000)"],
-            rows: [farm_0, farm_1, farm_2, farm_3, farm_4, farm_5]
+            rows: [catCase, farm_s0, farm_s1, farm_s2, farm_s3, farm_s4, farm_s5,
+                   dogCase, farm_c0, farm_c1, farm_c2, farm_c3, farm_c4, farm_c5]
         )
     )
 
     assert(
-        Array(repeating: "mew", count: 5) == [farm_1.value.get().bark(), farm_2.value.get().bark(), farm_3.value.get().bark(), farm_4.value.get().bark(), farm_5.value.get().bark()]
+        Array(repeating: "mew", count: 5) == [farm_s1.value.get().bark(), farm_s2.value.get().bark(), farm_s3.value.get().bark(), farm_s4.value.get().bark(), farm_s5.value.get().bark()]
+    )
+    assert(
+        Array(repeating: "bowow", count: 5) == [farm_c1.value.get().bark(), farm_c2.value.get().bark(), farm_c3.value.get().bark(), farm_c4.value.get().bark(), farm_c5.value.get().bark()]
     )
 } 
