@@ -1,6 +1,8 @@
 import Foundation
 import TryErasure
 
+let repeatTime = 1000
+
 struct PrintTable: CustomStringConvertible {
     let title: String
     let textLength: Int
@@ -40,11 +42,11 @@ struct ClockMeasure<T>: TablePrintable {
         self.label = label
         let start = clock()
         var value: T!
-        for _ in 0..<100_000 { value = `init`() }
+        for _ in 0..<repeatTime { value = `init`() }
         self.value = value
         self.initTime = clock() - start
         let start2 = clock()
-        for _ in 0..<100_000 { _ = `method`(value) }
+        for _ in 0..<repeatTime { _ = `method`(value) }
         self.methodTime = clock() - start2
     }
 
@@ -154,8 +156,6 @@ Execute.benchmark {
     let cardboardHouse = CardboardHouse(cat: cat)
     let dog = Dog()
     let woodHouse = WoodHouse(dog: dog)
-    let catCase = ["struct Cat"]
-    let dogCase = ["class Dog"]
 
     let (animal_s0, animal_s1, animal_s2, animal_s3, animal_s4, animal_s5)
         = Execute.random(
@@ -227,15 +227,20 @@ Execute.benchmark {
 
     print(
         PrintTable(
-            title: "Animal(4 function, 0 assoctype)",
+            title: "Animal(4 function, 0 assoctype, struct)",
             textLength: 25,
-            header: ["＼", "init clock(x100_000)", "mem size", "method clock(x100_000)"],
-            rows: [catCase, animal_s0, animal_s1, animal_s2, animal_s3, animal_s4, animal_s5,
-                   dogCase, animal_c0, animal_c1, animal_c2, animal_c3, animal_c4, animal_c5]
+            header: ["＼", "init clock(x\(repeatTime))", "mem size", "method clock(x\(repeatTime))"],
+            rows: [animal_s0, animal_s1, animal_s2, animal_s3, animal_s4, animal_s5]
         )
     )
     
-    Thread.sleep(forTimeInterval: 1)
+    print(
+        PrintTable(
+            title: "Animal(4 function, 0 assoctype, class)",
+            textLength: 25,
+            header: ["＼", "init clock(x\(repeatTime))", "mem size", "method clock(x\(repeatTime))"],
+            rows: [animal_c0, animal_c1, animal_c2, animal_c3, animal_c4, animal_c5])
+    )
 
     let (farm_s0, farm_s1, farm_s2, farm_s3, farm_s4, farm_s5)
         = Execute.random(
@@ -309,11 +314,19 @@ Execute.benchmark {
 
     print(
         PrintTable(
-            title: "Farm(1 function, 1 assoctype)",
+            title: "Farm(1 function, 1 assoctype, struct)",
             textLength: 25,
-            header: ["＼", "init clock(x100_000)", "mem size", "method clock(x100_000)"],
-            rows: [catCase, farm_s0, farm_s1, farm_s2, farm_s3, farm_s4, farm_s5,
-                   dogCase, farm_c0, farm_c1, farm_c2, farm_c3, farm_c4, farm_c5]
+            header: ["＼", "init clock(x\(repeatTime))", "mem size", "method clock(x\(repeatTime))"],
+            rows: [farm_s0, farm_s1, farm_s2, farm_s3, farm_s4, farm_s5]
+        )
+    )
+    
+    print(
+        PrintTable(
+            title: "Farm(1 function, 1 assoctype, class)",
+            textLength: 25,
+            header: ["＼", "init clock(x\(repeatTime))", "mem size", "method clock(x\(repeatTime))"],
+            rows: [farm_c0, farm_c1, farm_c2, farm_c3, farm_c4, farm_c5]
         )
     )
 
